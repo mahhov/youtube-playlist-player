@@ -3,7 +3,8 @@ angular.module('ytPlayer')
         var googleApi = 'https://www.googleapis.com/youtube/v3/';
         var key = 'AIzaSyAdkXuGc2f7xJg5FLTWBi2cRUhzAJD-eC0';
         var playerStale;
-        var getNextVideoId;
+        var size = [390, 640];
+        size = [100, 100];
 
         this.setInitFunction = function (initFunction) {
             $window.onYouTubePlayerAPIReady = function () {
@@ -14,21 +15,18 @@ angular.module('ytPlayer')
             };
         };
 
-        this.createPlayer = function (divId, getNextVideoIdFunction) {
+        this.createPlayer = function (divId, onReadyCallback, onVideoEndCallback) {
             var self = this;
-            getNextVideoId = getNextVideoIdFunction;
             playerStale = new YT.Player(divId, {
-                height: '100',
-                width: '100',
-                // height: '390',
-                // width: '640',
+                height: size[0],
+                width: size[1],
                 events: {
                     'onReady': function (event) {
-                        self.playNext(playerStale = event.target);
+                        onReadyCallback(playerStale = event.target);
                     },
                     'onStateChange': function (event) {
                         if (event.data === 0)
-                            self.playNext(event.target);
+                            onVideoEndCallback(event.target);
                     }
                 }
             });
@@ -65,7 +63,7 @@ angular.module('ytPlayer')
             return playlistItems;
         };
 
-        this.playNext = function (player) {
-            (player ? player : playerStale ).loadVideoById(getNextVideoId());
+        this.playVideo = function (player, videoId) {
+            (player ? player : playerStale ).loadVideoById(videoId);
         };
     });

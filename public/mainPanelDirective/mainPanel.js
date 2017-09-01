@@ -12,7 +12,7 @@ angular.module('ytPlayer')
                 $scope.player = {};
                 $scope.statusLines = {};
 
-                $scope.getNextVideoId = function (player) {
+                var getNextVideoId = function (player) {
                     var videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
                     setStatus(videoIndex);
                     return $scope.playlistItems[videoIndex].id;
@@ -20,7 +20,7 @@ angular.module('ytPlayer')
 
                 $scope.init = function () {
                     $scope.loadPlaylist(defaultPlaylistId);
-                    youtubeService.createPlayer('playerDiv', $scope.getNextVideoId);
+                    youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
 
                 youtubeService.setInitFunction($scope.init);
@@ -41,7 +41,7 @@ angular.module('ytPlayer')
                 };
 
                 $scope.nextPlaylistItem = function () {
-                    youtubeService.playNext(null, $scope.getNextVideoId())
+                    youtubeService.playVideo(null, getNextVideoId())
                 };
 
                 // shortcutService.addShortcut('t', true, false, $scope.addPairCallback);
