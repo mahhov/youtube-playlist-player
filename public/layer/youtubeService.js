@@ -9,9 +9,6 @@ angular.module('ytPlayer')
         this.setInitFunction = function (initFunction) {
             $window.onYouTubePlayerAPIReady = function () {
                 initFunction();
-                setTimeout(function () {
-                    $rootScope.$apply();
-                });
             };
         };
 
@@ -23,6 +20,7 @@ angular.module('ytPlayer')
                 events: {
                     'onReady': function (event) {
                         onReadyCallback(playerStale = event.target);
+                        $rootScope.$apply();
                     },
                     'onStateChange': function (event) {
                         if (event.data === 0)
@@ -32,7 +30,7 @@ angular.module('ytPlayer')
             });
         };
 
-        var retrievePlaylistPage = function (playlistId, pageToken) {
+        var fetchPlaylistPage = function (playlistId, pageToken) {
             var param = {
                 key: key,
                 part: 'snippet',
@@ -42,7 +40,7 @@ angular.module('ytPlayer')
             };
             var url = googleApi + 'playlistItems' + '?' + jQuery.param(param);
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET", url, false);
+            xmlHttp.open('GET', url, false);
             xmlHttp.send(null);
             return JSON.parse(xmlHttp.responseText);
         };
@@ -51,7 +49,7 @@ angular.module('ytPlayer')
             var playlistItems = [];
             var nextPageToken = '';
             do {
-                var playlistPage = retrievePlaylistPage(playlistId, nextPageToken);
+                var playlistPage = fetchPlaylistPage(playlistId, nextPageToken);
                 nextPageToken = playlistPage.nextPageToken;
                 _.each(playlistPage.items, function (item) {
                     playlistItems.push({

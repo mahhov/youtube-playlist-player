@@ -6,11 +6,32 @@ angular.module('ytPlayer')
             templateUrl: 'mainPanelDirective/mainPanel.html',
             scope: {},
             controller: function ($scope, storeService, youtubeService) {
-                var defaultPlaylistId = "PLameShrvoeYfp54xeNPK1fGxd2a7IzqU2";
-
+                $scope.playlistId = 'PLameShrvoeYfp54xeNPK1fGxd2a7IzqU2';
                 $scope.playlistItems = [];
-                $scope.player = {};
-                $scope.statusLines = {};
+                $scope.statusLines = ['initializing'];
+
+                $scope.init = function () {
+                    $scope.loadPlaylist();
+                    youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
+                };
+
+                var setStatus = function (videoIndex) {
+                    $scope.statusLines[0] = 'playing';
+                    $scope.statusLines[1] = $scope.playlistItems[videoIndex].name;
+                    $scope.statusLines[2] = videoIndex + ' of ' + $scope.playlistItems.length;
+                };
+
+                $scope.loadPlaylist = function () {
+                    $scope.playlistItems = storeService.loadPlaylist($scope.playlistId);
+                    if (!$scope.playlistItems)
+                        resetPlaylist();
+                };
+
+                $scope.resetPlaylist = function () {
+                    $scope.playlistItems = youtubeService.fetchPlaylist($scope.playlistId);
+                    storeService.savePlaylist($scope.playlistId, $scope.playlistItems);
+                    $scope.statusLines = ['fetched playlist data', 'playlist id: ' + $scope.playlistId, $scope.playlistItems.length + ' videos'];
+                };
 
                 var getNextVideoId = function (player) {
                     var videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
@@ -18,31 +39,11 @@ angular.module('ytPlayer')
                     return $scope.playlistItems[videoIndex].id;
                 };
 
-                $scope.init = function () {
-                    $scope.loadPlaylist(defaultPlaylistId);
-                    youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
-                };
-
-                youtubeService.setInitFunction($scope.init);
-
-                var setStatus = function (videoIndex) {
-                    $scope.statusLines = [];
-                    $scope.statusLines[0] = 'playing';
-                    $scope.statusLines[1] = $scope.playlistItems[videoIndex].name;
-                    $scope.statusLines[2] = videoIndex + ' of ' + $scope.playlistItems.length;
-                };
-
-                $scope.loadPlaylist = function (playlistId) {
-                    $scope.playlistItems = storeService.loadPlaylist() || youtubeService.fetchPlaylist(playlistId);
-                };
-
-                $scope.resetPlaylist = function () {
-
-                };
-
                 $scope.nextPlaylistItem = function () {
                     youtubeService.playVideo(null, getNextVideoId())
                 };
+
+                youtubeService.setInitFunction($scope.init);
 
                 // shortcutService.addShortcut('t', true, false, $scope.addPairCallback);
                 // shortcutService.addShortcut('w', true, false, $scope.closePairCallback);

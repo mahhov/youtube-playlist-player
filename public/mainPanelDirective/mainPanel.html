@@ -1,14 +1,21 @@
 <div class="main-panel">
-    <div>
-        <input ng-model="playlistId">{{playlistId}}
+    <div class="section">
+        Playlist id
+        <input ng-model="playlistId" size="50">
+    </div>
+    <div class="section">
         <button ng-click="loadPlaylist()">load playlist</button>
         <button ng-click="resetPlaylist()">reset</button>
         <button ng-click="nextPlaylistItem()">next</button>
     </div>
 
-    <div id="playerDiv"></div>
+    <div id="playerDiv" class="section"></div>
 
-    <div ng-repeat="status in statusLines">{{status}}</div>
+    <div class="section">
+        <p ng-repeat="status in statusLines">{{status}}</p>
+    </div>
 
-    <div ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</div>
+    <div class="section">
+        <p ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</p>
+    </div>
 </div>
