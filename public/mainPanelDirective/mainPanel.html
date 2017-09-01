@@ -3,13 +3,17 @@
         Playlist id
         <input ng-model="playlistId" size="50">
     </div>
+
     <div class="section">
-        <button ng-click="loadPlaylist()">load playlist</button>
-        <button ng-click="resetPlaylist()">reset</button>
-        <button ng-click="nextPlaylistItem()">next</button>
+        <toggle value="showVideo" icon="'fa-window-maximize'"></toggle>
+        <button type="button" class="btn btn-info" ng-click="loadPlaylist()">load playlist</button>
+        <button type="button" class="btn btn-info" ng-click="resetPlaylist()">reset</button>
+        <button type="button" class="btn btn-info" ng-click="nextPlaylistItem()"><span class="fa fa-forward"></span></button>
     </div>
 
-    <div id="playerDiv" class="section"></div>
+    <div class="section" ng-show="showVideo">
+        <div id="playerDiv"></div>
+    </div>
 
     <div class="section">
         <p ng-repeat="status in statusLines">{{status}}</p>

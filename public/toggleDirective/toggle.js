@@ -1,4 +1,4 @@
-angular.module('jsonBeautifyAngular')
+angular.module('ytPlayer')
     .directive('toggle', function () {
         return {
             restrict: 'E',

@@ -9,6 +9,7 @@ angular.module('ytPlayer')
                 $scope.playlistId = 'PLameShrvoeYfp54xeNPK1fGxd2a7IzqU2';
                 $scope.playlistItems = [];
                 $scope.statusLines = ['initializing'];
+                $scope.showVideo = true;
 
                 $scope.init = function () {
                     $scope.loadPlaylist();

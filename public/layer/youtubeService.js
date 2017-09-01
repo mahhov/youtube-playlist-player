@@ -4,7 +4,6 @@ angular.module('ytPlayer')
         var key = 'AIzaSyAdkXuGc2f7xJg5FLTWBi2cRUhzAJD-eC0';
         var playerStale;
         var size = [390, 640];
-        size = [100, 100];
 
         this.setInitFunction = function (initFunction) {
             $window.onYouTubePlayerAPIReady = function () {
