@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAY;EACV,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,2BAA2B;EACxC,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,IAAI",
+"sources": ["../../mainPanelDirective/mainPanel.scss"],
+"names": [],
+"file": "mainPanel.css"
+}
