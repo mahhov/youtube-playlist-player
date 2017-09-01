@@ -1,14 +1,14 @@
 <div class="main-panel">
+    <div>
+        <input ng-model="playlistId">{{playlistId}}
+        <button ng-click="loadPlaylist()">load playlist</button>
+        <button ng-click="resetPlaylist()">reset</button>
+        <button ng-click="nextPlaylistItem()">next</button>
+    </div>
+
     <div id="playerDiv"></div>
 
     <div ng-repeat="status in statusLines">{{status}}</div>
-
-    <div>
-        <button ng-click="resetPlaylist()">reset</button>
-        <button ng-click="playRandom(player)">next</button>
-        <toggle value="x"></toggle>
-        {{x}}
-    </div>
 
     <div ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</div>
 </div>
