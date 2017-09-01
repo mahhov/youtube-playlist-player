@@ -16,12 +16,6 @@ angular.module('ytPlayer')
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
 
-                var setStatus = function (videoIndex) {
-                    $scope.statusLines[0] = 'playing';
-                    $scope.statusLines[1] = $scope.playlistItems[videoIndex].name;
-                    $scope.statusLines[2] = videoIndex + ' of ' + $scope.playlistItems.length;
-                };
-
                 $scope.loadPlaylist = function () {
                     $scope.playlistItems = storeService.loadPlaylist($scope.playlistId);
                     if (!$scope.playlistItems)
@@ -29,14 +23,17 @@ angular.module('ytPlayer')
                 };
 
                 $scope.resetPlaylist = function () {
-                    $scope.playlistItems = youtubeService.fetchPlaylist($scope.playlistId);
-                    storeService.savePlaylist($scope.playlistId, $scope.playlistItems);
-                    $scope.statusLines = ['fetched playlist data', 'playlist id: ' + $scope.playlistId, $scope.playlistItems.length + ' videos'];
+                    $scope.statusLines = ['fetching playlist data', 'playlist id: ' + $scope.playlistId];
+                    youtubeService.fetchPlaylist($scope.playlistId, function (playlistItems) {
+                        $scope.playlistItems = playlistItems;
+                        storeService.savePlaylist($scope.playlistId, $scope.playlistItems);
+                        $scope.statusLines = ['fetched playlist data', 'playlist id: ' + $scope.playlistId, $scope.playlistItems.length + ' videos'];
+                    });
                 };
 
                 var getNextVideoId = function (player) {
                     var videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
-                    setStatus(videoIndex);
+                    $scope.statusLines = ['playing', $scope.playlistItems[videoIndex].name, videoIndex + ' of ' + $scope.playlistItems.length];
                     return $scope.playlistItems[videoIndex].id;
                 };
 

@@ -2,12 +2,12 @@
     <div class="section">
         Playlist id
         <input ng-model="playlistId" size="50">
+        <button type="button" class="btn btn-info" ng-click="loadPlaylist()"><span class="fa fa-play"></span></button>
     </div>
 
     <div class="section">
         <toggle value="showVideo" icon="'fa-window-maximize'"></toggle>
-        <button type="button" class="btn btn-info" ng-click="loadPlaylist()">load playlist</button>
-        <button type="button" class="btn btn-info" ng-click="resetPlaylist()">reset</button>
+        <button type="button" class="btn btn-info" ng-click="resetPlaylist()"><span class="fa fa-refresh"></span></button>
         <button type="button" class="btn btn-info" ng-click="nextPlaylistItem()"><span class="fa fa-forward"></span></button>
     </div>
 
