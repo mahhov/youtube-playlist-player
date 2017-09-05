@@ -9,11 +9,11 @@ angular.module('ytPlayer')
         };
 
         this.savePlaylistId = function (playlistId) {
-            localStorage.setItem('playlistId', playlistId)
+            localStorage.setItem('playlistId', playlistId);
         };
 
         this.loadPlaylistId = function () {
-            localStorage.getItem('playlistId')
+            return localStorage.getItem('playlistId');
         };
 
         this.saveSettings = function (settings) {
