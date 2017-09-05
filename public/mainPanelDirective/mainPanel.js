@@ -50,6 +50,10 @@ angular.module('ytPlayer')
                     youtubeService.playVideo(null, getNextVideoId())
                 };
 
+                $scope.showPause = function () {
+                    return !youtubeService.isPaused();
+                };
+
                 $scope.getStatus = function () {
                     return statusService.get();
                 };

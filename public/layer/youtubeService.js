@@ -4,6 +4,7 @@ angular.module('ytPlayer')
             var key = 'AIzaSyAdkXuGc2f7xJg5FLTWBi2cRUhzAJD-eC0';
             var playerStale;
             var size = [390, 640];
+            var paused;
 
             this.setInitFunction = function (initFunction) {
                 $window.onYouTubePlayerAPIReady = function () {
@@ -63,15 +64,21 @@ angular.module('ytPlayer')
             };
 
             this.pauseVideo = function () {
+                paused = true;
                 playerStale.pauseVideo();
             };
-            
+
             this.resumeVideo = function () {
+                paused = false;
                 playerStale.playVideo();
             };
 
             this.playVideo = function (player, videoId) {
                 (player ? player : playerStale ).loadVideoById(videoId);
             };
+
+            this.isPaused = function () {
+                return paused;
+            }
         }
     );

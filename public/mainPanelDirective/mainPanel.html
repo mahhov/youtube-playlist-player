@@ -8,8 +8,8 @@
     <div class="section">
         <toggle value="showVideo" icon="'fa-window-maximize'"></toggle>
         <button type="button" class="btn btn-info" ng-click="resetPlaylist()"><span class="fa fa-refresh"></span></button>
-        <button type="button" class="btn btn-info PlayButton" ng-click="pausePlaylistItem()"><span class="fa fa-pause"></span></button>
-        <button type="button" class="btn btn-info" ng-click="resumePlaylistItem()"><span class="fa fa-play"></span></button>
+        <button type="button" class="btn btn-info PlayButton" ng-click="pausePlaylistItem()" ng-if="showPause()"><span class="fa fa-pause"></span></button>
+        <button type="button" class="btn btn-info PlayButton" ng-click="resumePlaylistItem()" ng-if="!showPause()"><span class="fa fa-play"></span></button>
         <button type="button" class="btn btn-info SkipButton" ng-click="nextPlaylistItem()"><span class="fa fa-forward"></span></button>
     </div>
 
