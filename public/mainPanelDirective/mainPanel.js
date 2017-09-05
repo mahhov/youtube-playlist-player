@@ -6,13 +6,13 @@ angular.module('ytPlayer')
             templateUrl: 'mainPanelDirective/mainPanel.html',
             scope: {},
             controller: function ($scope, statusService, storeService, youtubeService) {
-                $scope.playlistId = 'PLameShrvoeYfp54xeNPK1fGxd2a7IzqU2';
-                $scope.playlistItems = [];
-                statusService.set(['initializing']);
-                $scope.showVideo = true;
+                statusService.set(['begin']);
 
                 $scope.init = function () {
-                    statusService.set(['begin initializing']);
+                    statusService.set(['initializing']);
+                    $scope.playlistId = storeService.loadPlaylistId() || 'PL8B378392000F267B';
+                    $scope.playlistItems = [];
+                    $scope.showVideo = true;
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
@@ -21,6 +21,7 @@ angular.module('ytPlayer')
                     $scope.playlistItems = storeService.loadPlaylist($scope.playlistId);
                     if (!$scope.playlistItems)
                         $scope.resetPlaylist();
+                    storeService.savePlaylistId($scope.playlistId);
                 };
 
                 $scope.resetPlaylist = function () {

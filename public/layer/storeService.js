@@ -7,4 +7,12 @@ angular.module('ytPlayer')
         this.loadPlaylist = function (playlistId) {
             return JSON.parse(localStorage.getItem(playlistId + '-playlistItems'));
         };
+
+        this.savePlaylistId = function (playlistId) {
+            localStorage.setItem('playlistId', playlistId)
+        };
+
+        this.loadPlaylistId = function () {
+            localStorage.getItem('playlistId')
+        };
     });
