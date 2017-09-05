@@ -7,6 +7,7 @@ angular.module('ytPlayer')
             scope: {},
             controller: function ($scope, statusService, storeService, youtubeService) {
                 statusService.set(['begin']);
+                var videoIndex = -1;
 
                 $scope.init = function () {
                     statusService.set(['initializing']);
@@ -34,7 +35,10 @@ angular.module('ytPlayer')
                 };
 
                 var getNextVideoId = function (player) {
-                    var videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
+                    if ($scope.shuffle)
+                        videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
+                    else
+                        videoIndex++;
                     statusService.set(['playing', $scope.playlistItems[videoIndex].name, videoIndex + ' of ' + $scope.playlistItems.length]);
                     return $scope.playlistItems[videoIndex].id;
                 };
