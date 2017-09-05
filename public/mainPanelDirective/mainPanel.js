@@ -42,7 +42,7 @@ angular.module('ytPlayer')
                         videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
                     else
                         videoIndex++;
-                    statusService.set(['playing', $scope.playlistItems[videoIndex].name, videoIndex + ' of ' + $scope.playlistItems.length]);
+                    statusService.set(['playing ' + videoIndex + ' of ' + $scope.playlistItems.length, $scope.playlistItems[videoIndex].name]);
                     return $scope.playlistItems[videoIndex].id;
                 };
 
