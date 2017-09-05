@@ -1,5 +1,5 @@
 angular.module('ytPlayer')
-    .service('youtubeService', function ($window, $rootScope, $http) {
+    .service('youtubeService', function ($window, $rootScope, $http, statusService) {
             var googleApi = 'https://www.googleapis.com/youtube/v3/';
             var key = 'AIzaSyAdkXuGc2f7xJg5FLTWBi2cRUhzAJD-eC0';
             var playerStale;
@@ -30,7 +30,7 @@ angular.module('ytPlayer')
             };
 
             var fetchPlaylistPage = function (playlistId, pageToken, callback) {
-                console.log('fetch', pageToken);
+                statusService.set(['fetch ' + pageToken]);
                 var param = {
                     key: key,
                     part: 'snippet',

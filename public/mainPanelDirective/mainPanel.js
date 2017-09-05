@@ -5,10 +5,10 @@ angular.module('ytPlayer')
             replace: true,
             templateUrl: 'mainPanelDirective/mainPanel.html',
             scope: {},
-            controller: function ($scope, storeService, youtubeService) {
+            controller: function ($scope, statusService, storeService, youtubeService) {
                 $scope.playlistId = 'PLameShrvoeYfp54xeNPK1fGxd2a7IzqU2';
                 $scope.playlistItems = [];
-                $scope.statusLines = ['initializing'];
+                statusService.set(['initializing']);
                 $scope.showVideo = true;
 
                 $scope.init = function () {
@@ -23,22 +23,26 @@ angular.module('ytPlayer')
                 };
 
                 $scope.resetPlaylist = function () {
-                    $scope.statusLines = ['fetching playlist data', 'playlist id: ' + $scope.playlistId];
+                    statusService.set(['fetching playlist data', 'playlist id: ' + $scope.playlistId]);
                     youtubeService.fetchPlaylist($scope.playlistId, function (playlistItems) {
                         $scope.playlistItems = playlistItems;
                         storeService.savePlaylist($scope.playlistId, $scope.playlistItems);
-                        $scope.statusLines = ['fetched playlist data', 'playlist id: ' + $scope.playlistId, $scope.playlistItems.length + ' videos'];
+                        statusService.set(['fetched playlist data', 'playlist id: ' + $scope.playlistId, $scope.playlistItems.length + ' videos']);
                     });
                 };
 
                 var getNextVideoId = function (player) {
                     var videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
-                    $scope.statusLines = ['playing', $scope.playlistItems[videoIndex].name, videoIndex + ' of ' + $scope.playlistItems.length];
+                    statusService.set(['playing', $scope.playlistItems[videoIndex].name, videoIndex + ' of ' + $scope.playlistItems.length]);
                     return $scope.playlistItems[videoIndex].id;
                 };
 
                 $scope.nextPlaylistItem = function () {
                     youtubeService.playVideo(null, getNextVideoId())
+                };
+
+                $scope.getStatus = function () {
+                    return statusService.get();
                 };
 
                 youtubeService.setInitFunction($scope.init);
