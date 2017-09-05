@@ -14,6 +14,9 @@ angular.module('ytPlayer')
                     $scope.playlistId = storeService.loadPlaylistId() || 'PL8B378392000F267B';
                     $scope.playlistItems = [];
                     $scope.showVideo = true;
+                    var settings = storeService.loadSettings() || {};
+                    $scope.shuffle = settings.shuffle;
+                    $scope.showVideo = settings.showVideo;
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
@@ -63,7 +66,12 @@ angular.module('ytPlayer')
                     return statusService.get();
                 };
 
+                $scope.saveSettings = function () {
+                    storeService.saveSettings({'shuffle': $scope.shuffle, 'showVideo': $scope.showVideo});
+                };
+
                 youtubeService.setInitFunction($scope.init);
+
 
                 // shortcutService.addShortcut('t', true, false, $scope.addPairCallback);
                 // shortcutService.addShortcut('w', true, false, $scope.closePairCallback);

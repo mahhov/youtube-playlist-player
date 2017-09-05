@@ -8,8 +8,6 @@ angular.module('ytPlayer')
                 value: '=',
                 icon: '=?',
                 text: '=?'
-            },
-            controller: function ($scope) {
             }
         }
     });

@@ -6,9 +6,9 @@
     </div>
 
     <div class="section">
-        <toggle value="showVideo" icon="'fa-window-maximize'"></toggle>
+        <toggle value="showVideo" icon="'fa-window-maximize'" ng-click="saveSettings()"></toggle>
         <button type="button" class="btn btn-info" ng-click="resetPlaylist()"><span class="fa fa-refresh"></span></button>
-        <toggle value="shuffle" icon="'fa-random'"></toggle>
+        <toggle value="shuffle" icon="'fa-random'" ng-click="saveSettings()"></toggle>
     </div>
 
     <div class="section" ng-show="showVideo">

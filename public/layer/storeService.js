@@ -15,4 +15,12 @@ angular.module('ytPlayer')
         this.loadPlaylistId = function () {
             localStorage.getItem('playlistId')
         };
+
+        this.saveSettings = function (settings) {
+            localStorage.setItem('settings', JSON.stringify(settings));
+        };
+
+        this.loadSettings = function () {
+            return JSON.parse(localStorage.getItem('settings'));
+        };
     });
