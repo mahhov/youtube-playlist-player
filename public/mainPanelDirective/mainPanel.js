@@ -12,6 +12,7 @@ angular.module('ytPlayer')
                 $scope.showVideo = true;
 
                 $scope.init = function () {
+                    statusService.set(['begin initializing']);
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };

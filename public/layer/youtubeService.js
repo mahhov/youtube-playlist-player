@@ -12,6 +12,7 @@ angular.module('ytPlayer')
             };
 
             this.createPlayer = function (divId, onReadyCallback, onVideoEndCallback) {
+                statusService.set(['creating initializing']);
                 var self = this;
                 playerStale = new YT.Player(divId, {
                     height: size[0],
