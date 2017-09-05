@@ -38,6 +38,14 @@ angular.module('ytPlayer')
                     return $scope.playlistItems[videoIndex].id;
                 };
 
+                $scope.pausePlaylistItem = function () {
+                    youtubeService.pauseVideo();
+                };
+
+                $scope.resumePlaylistItem = function () {
+                    youtubeService.resumeVideo();
+                };
+
                 $scope.nextPlaylistItem = function () {
                     youtubeService.playVideo(null, getNextVideoId())
                 };

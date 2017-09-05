@@ -62,6 +62,14 @@ angular.module('ytPlayer')
                 fetchPlaylistPage(playlistId, '', perPage);
             };
 
+            this.pauseVideo = function () {
+                playerStale.pauseVideo();
+            };
+            
+            this.resumeVideo = function () {
+                playerStale.playVideo();
+            };
+
             this.playVideo = function (player, videoId) {
                 (player ? player : playerStale ).loadVideoById(videoId);
             };
