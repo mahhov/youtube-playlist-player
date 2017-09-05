@@ -19,7 +19,7 @@ angular.module('ytPlayer')
                 $scope.loadPlaylist = function () {
                     $scope.playlistItems = storeService.loadPlaylist($scope.playlistId);
                     if (!$scope.playlistItems)
-                        resetPlaylist();
+                        $scope.resetPlaylist();
                 };
 
                 $scope.resetPlaylist = function () {
