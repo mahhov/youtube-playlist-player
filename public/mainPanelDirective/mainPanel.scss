@@ -1,3 +1,8 @@
+body {
+  //background-color: black;
+  //color: white;
+}
+
 .main-panel {
   color: blue;
   font-family: Consolas, monaco, monospace;
@@ -10,5 +15,9 @@
 
   .vert-section-break {
     margin-left: 30px;
+  }
+
+  .span-row {
+    display: block;
   }
 }

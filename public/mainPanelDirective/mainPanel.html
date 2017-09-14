@@ -21,10 +21,10 @@
     </div>
 
     <div class="section">
-        <p ng-repeat="status in getStatus()">{{status}}</p>
+        <span ng-repeat="status in getStatus()">{{status}}</span>
     </div>
 
     <div class="section">
-        <p ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</p>
+        <span class="span-row" ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</span>
     </div>
 </div>
