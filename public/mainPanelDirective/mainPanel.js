@@ -47,19 +47,18 @@ angular.module('ytPlayer')
                 };
 
                 $scope.pausePlaylistItem = function () {
-                    youtubeService.pauseVideo();
-                };
-
-                $scope.resumePlaylistItem = function () {
-                    youtubeService.resumeVideo();
+                    if ($scope.isPaused())
+                        youtubeService.resumeVideo();
+                    else
+                        youtubeService.pauseVideo();
                 };
 
                 $scope.nextPlaylistItem = function () {
                     youtubeService.playVideo(null, getNextVideoId())
                 };
 
-                $scope.showPause = function () {
-                    return !youtubeService.isPaused();
+                $scope.isPaused = function () {
+                    return youtubeService.isPaused();
                 };
 
                 $scope.getStatus = function () {
