@@ -7,9 +7,16 @@ angular.module('ytPlayer')
             var paused;
 
             this.setInitFunction = function (initFunction) {
-                $window.onYouTubePlayerAPIReady = function () {
+                if (!$window.YT) {
+                    console.log('1');
+                    $window.onYouTubePlayerAPIReady = initFunction;
+                } else if ($window.YT.loaded) {
+                    console.log('2');
                     initFunction();
-                };
+                } else {
+                    console.log('3');
+                    $window.YT.ready(initFunction);
+                }
             };
 
             this.createPlayer = function (divId, onReadyCallback, onVideoEndCallback) {

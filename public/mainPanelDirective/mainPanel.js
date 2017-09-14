@@ -72,7 +72,6 @@ angular.module('ytPlayer')
 
                 youtubeService.setInitFunction($scope.init);
 
-
                 // shortcutService.addShortcut('t', true, false, $scope.addPairCallback);
                 // shortcutService.addShortcut('w', true, false, $scope.closePairCallback);
                 // shortcutService.addShortcut('Enter', false, true, $scope.addSessionCallback);
