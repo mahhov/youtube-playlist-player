@@ -25,6 +25,8 @@
     </div>
 
     <div class="section">
-        <span class="span-row" ng-repeat="playlistItem in playlistItems">{{$index}} : {{playlistItem.name}}}}</span>
+        <span class="span-row" ng-repeat="playlistItem in playlistItems">
+            <a href="" ng-click="setPlayListItem($index)">{{$index}} : {{playlistItem.name}}</a>
+        </span>
     </div>
 </div>

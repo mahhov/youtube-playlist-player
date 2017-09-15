@@ -56,6 +56,10 @@ angular.module('ytPlayer')
                 $scope.nextPlaylistItem = function () {
                     youtubeService.playVideo(null, getNextVideoId())
                 };
+                
+                $scope.setPlayListItem = function (videoIndex) {
+                    youtubeService.playVideo(null, $scope.playlistItems[videoIndex].id)
+                };
 
                 $scope.isPaused = function () {
                     return youtubeService.isPaused();
