@@ -5,7 +5,7 @@ angular.module('ytPlayer')
             replace: true,
             templateUrl: 'mainPanelDirective/mainPanel.html',
             scope: {},
-            controller: function ($scope, statusService, storeService, youtubeService) {
+            controller: function ($scope, notificationService, statusService, storeService, youtubeService) {
                 statusService.set(['begin']);
                 var videoIndex = -1;
 
@@ -37,13 +37,13 @@ angular.module('ytPlayer')
                     });
                 };
 
-                var getNextVideoId = function (player) {
+                var getNextVideoIndex = function (player) {
                     if ($scope.shuffle)
                         videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
                     else
                         videoIndex++;
                     statusService.set(['playing ' + videoIndex + ' of ' + $scope.playlistItems.length, $scope.playlistItems[videoIndex].name]);
-                    return $scope.playlistItems[videoIndex].id;
+                    return videoIndex;
                 };
 
                 $scope.pausePlaylistItem = function () {
@@ -54,10 +54,11 @@ angular.module('ytPlayer')
                 };
 
                 $scope.nextPlaylistItem = function () {
-                    youtubeService.playVideo(null, getNextVideoId())
+                    $scope.setPlayListItem(getNextVideoIndex());
                 };
-                
+
                 $scope.setPlayListItem = function (videoIndex) {
+                    notificationService.notify($scope.playlistItems[videoIndex].name);
                     youtubeService.playVideo(null, $scope.playlistItems[videoIndex].id)
                 };
 
