@@ -46,6 +46,10 @@ angular.module('ytPlayer')
                     return videoIndex;
                 };
 
+                $scope.rewindPlaylistItem = function() {
+                    youtubeService.rewindVideo();
+                };
+
                 $scope.pausePlaylistItem = function () {
                     if ($scope.isPaused())
                         youtubeService.resumeVideo();

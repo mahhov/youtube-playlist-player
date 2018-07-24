@@ -5,6 +5,7 @@ angular.module('ytPlayer')
             var playerStale;
             var size = [390, 640];
             var paused;
+            var playingVideoId;
 
             this.setInitFunction = function (initFunction) {
                 if (!$window.YT) {
@@ -70,6 +71,10 @@ angular.module('ytPlayer')
                 fetchPlaylistPage(playlistId, '', perPage);
             };
 
+            this.rewindVideo = function () {
+                this.playVideo(null, playingVideoId);
+            };
+
             this.pauseVideo = function () {
                 paused = true;
                 playerStale.pauseVideo();
@@ -81,7 +86,8 @@ angular.module('ytPlayer')
             };
 
             this.playVideo = function (player, videoId) {
-                (player ? player : playerStale ).loadVideoById(videoId);
+                playingVideoId = videoId;
+                (player ? player : playerStale).loadVideoById(videoId);
             };
 
             this.isPaused = function () {
