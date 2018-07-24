@@ -71,7 +71,11 @@ angular.module('ytPlayer')
                 };
 
                 $scope.saveSettings = function () {
-                    storeService.saveSettings({'shuffle': $scope.shuffle, 'showVideo': $scope.showVideo});
+                    storeService.saveSettings({
+                        'shuffle': $scope.shuffle,
+                        'showVideo': $scope.showVideo,
+                        'playControlsOnly': $scope.playControlsOnly
+                    });
                 };
 
                 youtubeService.setInitFunction($scope.init);

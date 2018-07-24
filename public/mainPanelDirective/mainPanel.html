@@ -1,5 +1,5 @@
 <div class="main-panel">
-    <div class="section">
+    <div class="section" ng-show="!playControlsOnly">
         Playlist id
         <input ng-model="playlistId" size="50">
         <button type="button" class="btn btn-info" ng-click="loadPlaylist()"><span class="fa fa-play"></span></button>
@@ -7,6 +7,7 @@
     </div>
 
     <div class="section">
+        <toggle value="playControlsOnly" icon="'fa-window-minimize'" ng-click="saveSettings()"></toggle>
         <toggle value="showVideo" icon="'fa-window-maximize'" ng-click="saveSettings()"></toggle>
         <toggle value="shuffle" icon="'fa-random'" ng-click="saveSettings()"></toggle>
 
@@ -24,7 +25,7 @@
         <span ng-repeat="status in getStatus()">{{status}} </span>
     </div>
 
-    <div class="section">
+    <div class="section" ng-show="!playControlsOnly">
         <span class="span-row" ng-repeat="playlistItem in playlistItems">
             <a href="" ng-click="setPlayListItem($index)">{{$index}} : {{playlistItem.name}}</a>
         </span>
