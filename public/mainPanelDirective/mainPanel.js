@@ -13,10 +13,10 @@ angular.module('ytPlayer')
                     statusService.set(['initializing']);
                     $scope.playlistId = storeService.loadPlaylistId() || 'PL8B378392000F267B';
                     $scope.playlistItems = [];
-                    $scope.showVideo = true;
                     var settings = storeService.loadSettings() || {};
                     $scope.shuffle = settings.shuffle;
                     $scope.showVideo = settings.showVideo;
+                    $scope.playControlsOnly = settings.playControlsOnly;
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
