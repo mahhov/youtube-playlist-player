@@ -6,10 +6,12 @@
     "express": "~4.7.2"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "npm run build",
+    "build": "node-sass public/app.scss public/styles/app.css"
   },
   "devDependencies": {
-    "grunt-run": "^0.7.0"
+    "node-sass": "^4.9.2"
   },
   "author": "manuk",
   "license": "ISC",

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAKA,WAAY;EACV,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,2BAA2B;EACxC,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI;EAEjB,oBAAS;IACP,UAAU,EAAE,IAAI;EAGlB,+BAAoB;IAClB,WAAW,EAAE,IAAI;EAGnB,qBAAU;IACR,OAAO,EAAE,KAAK",
-"sources": ["../mainPanelDirective/mainPanel.scss"],
-"names": [],
-"file": "app.css"
-}
