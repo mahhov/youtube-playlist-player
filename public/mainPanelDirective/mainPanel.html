@@ -11,8 +11,8 @@
         <toggle value="showVideo" icon="'fa-window-maximize'" ng-click="saveSettings()"></toggle>
         <toggle value="shuffle" icon="'fa-random'" ng-click="saveSettings()"></toggle>
 
-        <button type="button" class="btn btn-info" ng-click="rewindPlaylistItem()"><span class="fa fa-backward"></span></button>
-        <button type="button" class="vert-section-break btn btn-info PlayButton" ng-click="pausePlaylistItem()">
+        <button type="button" class="horiz-section-break btn btn-info" ng-click="rewindPlaylistItem()"><span class="fa fa-backward"></span></button>
+        <button type="button" class="btn btn-info PlayButton" ng-click="pausePlaylistItem()">
             <span class="fa fa-pause" ng-class="isPaused() ? 'fa-play' : 'fa-pause'"></span>
         </button>
         <button type="button" class="btn btn-info SkipButton" ng-click="nextPlaylistItem()"><span class="fa fa-forward"></span></button>
