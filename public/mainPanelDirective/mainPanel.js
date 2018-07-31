@@ -5,12 +5,13 @@ angular.module('ytPlayer')
             replace: true,
             templateUrl: 'mainPanelDirective/mainPanel.html',
             scope: {},
-            controller: function ($scope, notificationService, statusService, storeService, youtubeService) {
+            controller: function ($scope, notificationService, statusService, storeService, youtubeService, shortcutService) {
                 statusService.set(['begin']);
                 var videoIndex = -1;
 
                 $scope.init = function () {
                     statusService.set(['initializing']);
+                    createShortcuts();
                     $scope.playlistId = storeService.loadPlaylistId() || 'PL8B378392000F267B';
                     $scope.playlistItems = [];
                     var settings = storeService.loadSettings() || {};
@@ -19,6 +20,12 @@ angular.module('ytPlayer')
                     $scope.playControlsOnly = settings.playControlsOnly;
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
+                };
+
+                var createShortcuts = function () {
+                    shortcutService.addShortcut('ArrowLeft', false, false, $scope.rewindPlaylistItem);
+                    shortcutService.addShortcut('ArrowDown', false, false, $scope.pausePlaylistItem);
+                    shortcutService.addShortcut('ArrowRight', false, false, $scope.nextPlaylistItem);
                 };
 
                 $scope.loadPlaylist = function () {
@@ -46,7 +53,7 @@ angular.module('ytPlayer')
                     return videoIndex;
                 };
 
-                $scope.rewindPlaylistItem = function() {
+                $scope.rewindPlaylistItem = function () {
                     youtubeService.rewindVideo();
                 };
 
@@ -83,12 +90,6 @@ angular.module('ytPlayer')
                 };
 
                 youtubeService.setInitFunction($scope.init);
-
-                // shortcutService.addShortcut('t', true, false, $scope.addPairCallback);
-                // shortcutService.addShortcut('w', true, false, $scope.closePairCallback);
-                // shortcutService.addShortcut('Enter', false, true, $scope.addSessionCallback);
-                // shortcutService.addShortcut('[', true, false, $scope.selectPairLeft);
-                // shortcutService.addShortcut(']', true, false, $scope.selectPairRight);
             }
         }
     });
