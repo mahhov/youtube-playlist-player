@@ -18,6 +18,7 @@ angular.module('ytPlayer')
                     $scope.shuffle = settings.shuffle;
                     $scope.showVideo = settings.showVideo;
                     $scope.playControlsOnly = settings.playControlsOnly;
+                    $scope.playedVideoStack = [];
                     $scope.loadPlaylist();
                     youtubeService.createPlayer('playerDiv', $scope.nextPlaylistItem, $scope.nextPlaylistItem);
                 };
@@ -26,6 +27,7 @@ angular.module('ytPlayer')
                     shortcutService.addShortcut('ArrowLeft', false, false, $scope.rewindPlaylistItem);
                     shortcutService.addShortcut('ArrowDown', false, false, $scope.pausePlaylistItem);
                     shortcutService.addShortcut('ArrowRight', false, false, $scope.nextPlaylistItem);
+                    shortcutService.addShortcut('ArrowUp', false, false, $scope.previousPlaylistItem);
                 };
 
                 $scope.loadPlaylist = function () {
@@ -49,7 +51,6 @@ angular.module('ytPlayer')
                         videoIndex = Math.floor(Math.random() * $scope.playlistItems.length);
                     else
                         videoIndex++;
-                    statusService.set(['playing ' + videoIndex + ' of ' + $scope.playlistItems.length, $scope.playlistItems[videoIndex].name]);
                     return videoIndex;
                 };
 
@@ -68,7 +69,18 @@ angular.module('ytPlayer')
                     $scope.setPlayListItem(getNextVideoIndex());
                 };
 
+                $scope.previousPlaylistItem = function () {
+                    videoIndex = $scope.playedVideoStack.pop();
+                    $scope.notifyAndPlay(videoIndex);
+                };
+
                 $scope.setPlayListItem = function (videoIndex) {
+                    $scope.playedVideoStack.push(videoIndex);
+                    $scope.notifyAndPlay(videoIndex);
+                };
+
+                $scope.notifyAndPlay = function (videoIndex) {
+                    statusService.set(['playing ' + videoIndex + ' of ' + $scope.playlistItems.length, $scope.playlistItems[videoIndex].name]);
                     notificationService.notify($scope.playlistItems[videoIndex].name);
                     youtubeService.playVideo(null, $scope.playlistItems[videoIndex].id)
                 };
